@@ -13,6 +13,12 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/white</item>
         <item name="android:windowLightStatusBar">true</item>
-        
+
+        <item name="android:textViewStyle">@style/App.Widget.TextView</item>
+    </style>
+
+    <style name="App.Widget.TextView" parent="Theme.MaterialComponents">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="fontFamily">@font/roboto_regular</item>
     </style>
 </resources>
