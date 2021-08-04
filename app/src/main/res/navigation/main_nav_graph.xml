@@ -20,4 +20,19 @@
         android:name="com.kushnir.app.easytofind.ui.main.MainFragment"
         android:label="MainFragment"
         tools:layout="@layout/fragment_main"/>
+
+    <dialog
+        android:id="@+id/errorDialog"
+        android:name="com.kushnir.app.easytofind.ui.dialogs.ErrorDialog"
+        android:label="ErrorDialog"
+        tools:layout="@layout/dialog_error">
+
+        <argument
+            android:name="error"
+            app:argType="com.devensis.frendo.data.models.responses.BaseErrorMessage"/>
+
+        <argument
+            android:name="error_string"
+            app:argType="string"/>
+    </dialog>
 </navigation>

@@ -21,4 +21,9 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="fontFamily">@font/roboto_regular</item>
     </style>
+
+    <style name="App.Widget.Button" parent="Theme.MaterialComponents">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="fontFamily">@font/roboto_regular</item>
+    </style>
 </resources>

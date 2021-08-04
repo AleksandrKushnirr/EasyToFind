@@ -2,4 +2,12 @@
 
     <string name="app_name">Easy to find</string>
 
+    <!--TextViews-->
+
+    <!--Buttons-->
+    <string name="btn_ok">OK</string>
+
+    <!--Texts-->
+    <string name="txt_error">An error has occurred</string>
+    <string name="txt_failed_connect_error">Failed connect to server. Please, check your internet connection or try again later.</string>
 </resources>
