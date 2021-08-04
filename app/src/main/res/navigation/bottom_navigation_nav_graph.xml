@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigavion_nav_graph"
+    app:startDestination="@id/topFilmsFragment">
+
+    <fragment
+        android:id="@+id/topFilmsFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.top.TopFilmsFragment"
+        android:label="TopFilmsFragment"
+        tools:layout="@layout/fragment_top_films"/>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/>
+    <fragment
+        android:id="@+id/likedFilmsFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.liked.LikedFilmsFragment"
+        android:label="LikedFilmsFragment"
+        tools:layout="@layout/fragment_liked_films"/>
+    <fragment
+        android:id="@+id/remindersFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.reminders.RemindersFragment"
+        android:label="RemindersFragment"
+        tools:layout="@layout/fragment_reminders"/>
+
+    <dialog
+        android:id="@+id/errorDialog"
+        android:name="com.kushnir.app.easytofind.ui.dialogs.ErrorDialog"
+        android:label="ErrorDialog"
+        tools:layout="@layout/dialog_error">
+
+        <argument
+            android:name="error"
+            app:argType="com.kushnir.app.easytofind.data.models.responses.BaseErrorMessage"/>
+
+        <argument
+            android:name="error_string"
+            app:argType="string"/>
+    </dialog>
+</navigation>
