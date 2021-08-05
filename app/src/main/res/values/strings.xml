@@ -3,9 +3,13 @@
     <string name="app_name">Easy to find</string>
 
     <!--TextViews-->
+    <string name="tv_top_best_films">Top best films</string>
+    <string name="tv_top_popular_films">Top popular films</string>
+    <string name="tv_top_await_films">Top await films</string>
 
     <!--Buttons-->
     <string name="btn_ok">OK</string>
+    <string name="btn_view_more">View more</string>
 
     <!--Titles-->
     <string name="title_top">Top</string>

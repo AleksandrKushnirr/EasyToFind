@@ -9,6 +9,7 @@
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
     <color name="divider">#BDBDBD</color>
+    <color name="shimmer_loaders_color">#ECEFF1</color>
 
     <color name="icons_checked_color">#024969</color>
 </resources>

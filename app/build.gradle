@@ -63,6 +63,7 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:1.4.0-alpha05"
     implementation "androidx.datastore:datastore-core:1.0.0-rc02"
     implementation "androidx.datastore:datastore-preferences:1.0.0-rc02"
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
@@ -70,11 +71,11 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:1.3.2"
 
     //DI
-    implementation "org.koin:koin-androidx-scope:2.2.0-rc-4"
-    implementation "org.koin:koin-androidx-viewmodel:2.2.0-rc-4"
-    implementation "org.koin:koin-androidx-fragment:2.2.0-rc-4"
+    implementation "org.koin:koin-androidx-scope:2.2.2"
+    implementation "org.koin:koin-androidx-viewmodel:2.2.2"
+    implementation "org.koin:koin-androidx-fragment:2.2.2"
     implementation "org.koin:koin-androidx-ext:2.2.0-rc-4"
-    implementation "org.koin:koin-core:2.2.0-rc-4"
+    implementation "org.koin:koin-core:2.2.2"
 
     // Web
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
@@ -104,5 +105,6 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     implementation 'com.whiteelephant:monthandyearpicker:1.3.0'
     implementation "io.karn:notify:1.3.0"
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
 }
