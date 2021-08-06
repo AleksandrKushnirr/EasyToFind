@@ -1,10 +1,16 @@
 package com.kushnir.app.easytofind.ui.main.top
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.Gravity
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
+import com.github.rubensousa.gravitysnaphelper.GravitySnapHelper
 import com.kushnir.app.easytofind.R
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
 import com.kushnir.app.easytofind.databinding.FragmentTopFilmsBinding
@@ -25,6 +31,7 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
         setListeners()
         setObservers()
         configureAdapters()
@@ -32,9 +39,42 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
         viewModel.getContent()
     }
 
+    private fun initViews() {
+        viewBinding.apply {
+            GravitySnapHelper(Gravity.START).apply {
+                maxFlingSizeFraction = 2f
+                attachToRecyclerView(recyclerViewBestFilms)
+            }
+            GravitySnapHelper(Gravity.START).apply {
+                maxFlingSizeFraction = 2f
+                attachToRecyclerView(recyclerViewPopularFilms)
+            }
+            GravitySnapHelper(Gravity.START).apply {
+                maxFlingSizeFraction = 2f
+                attachToRecyclerView(recyclerViewAwaitFilms)
+            }
+        }
+    }
+
     private fun setListeners() {
         viewBinding.apply {
+            recyclerViewBestFilms.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    super.onScrollStateChanged(recyclerView, newState)
 
+                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
+                        nestedScrollView.isNestedScrollingEnabled = false
+                    }
+                    when(newState) {
+                        RecyclerView.SCROLL_STATE_DRAGGING -> { nestedScrollView.isNestedScrollingEnabled = false }
+                        RecyclerView.SCROLL_STATE_IDLE -> { nestedScrollView.isNestedScrollingEnabled = true }
+                    }
+                }
+
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    super.onScrolled(recyclerView, dx, dy)
+                }
+            })
         }
     }
 
