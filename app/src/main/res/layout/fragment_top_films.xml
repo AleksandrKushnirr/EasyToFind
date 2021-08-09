@@ -61,7 +61,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_top_best"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_film_few_info"/>
+                tools:listitem="@layout/item_film_small"/>
 
             <TextView
                 android:id="@+id/tv_top_popular"
@@ -103,7 +103,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_top_popular"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_film_few_info"/>
+                tools:listitem="@layout/item_film_small"/>
 
             <TextView
                 android:id="@+id/tv_top_await"
@@ -145,7 +145,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_top_await"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:itemCount="5"
-                tools:listitem="@layout/item_film_few_info"/>
+                tools:listitem="@layout/item_film_small"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

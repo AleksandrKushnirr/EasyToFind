@@ -12,4 +12,10 @@
     <color name="shimmer_loaders_color">#ECEFF1</color>
 
     <color name="icons_checked_color">#024969</color>
+
+    <color name="rating_green">#a5d6a7</color>
+    <color name="rating_lime">#e6ee9c</color>
+    <color name="rating_yellow">#fff59d</color>
+    <color name="rating_orange">#ffcc80</color>
+    <color name="rating_red">#ef9a9a</color>
 </resources>
