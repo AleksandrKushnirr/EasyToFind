@@ -53,28 +53,16 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
                 maxFlingSizeFraction = 2f
                 attachToRecyclerView(recyclerViewAwaitFilms)
             }
+
+            recyclerViewBestFilms.isNestedScrollingEnabled = false
+            recyclerViewPopularFilms.isNestedScrollingEnabled = false
+            recyclerViewAwaitFilms.isNestedScrollingEnabled = false
         }
     }
 
     private fun setListeners() {
         viewBinding.apply {
-            recyclerViewBestFilms.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    super.onScrollStateChanged(recyclerView, newState)
 
-                    if (newState == RecyclerView.SCROLL_STATE_DRAGGING) {
-                        nestedScrollView.isNestedScrollingEnabled = false
-                    }
-                    when(newState) {
-                        RecyclerView.SCROLL_STATE_DRAGGING -> { nestedScrollView.isNestedScrollingEnabled = false }
-                        RecyclerView.SCROLL_STATE_IDLE -> { nestedScrollView.isNestedScrollingEnabled = true }
-                    }
-                }
-
-                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                    super.onScrolled(recyclerView, dx, dy)
-                }
-            })
         }
     }
 

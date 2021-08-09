@@ -158,7 +158,7 @@
             app:shimmer_auto_start="true"
             app:shimmer_clip_to_children="true"
             app:shimmer_duration="800"
-            app:shimmer_fixed_width="120dp"
+            app:shimmer_fixed_width="250dp"
             app:shimmer_tilt="20">
 
             <include layout="@layout/layout_top_films_loading"/>
