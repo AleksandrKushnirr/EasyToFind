@@ -7,7 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.kushnir.app.easytofind.R
-import com.kushnir.app.easytofind.databinding.ItemFilmFewInfoBinding
+import com.kushnir.app.easytofind.databinding.ItemFilmSmallBinding
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
 
 class TopFilmsAdapter(
@@ -25,7 +25,7 @@ class TopFilmsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopFilmsViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val view = ItemFilmFewInfoBinding.inflate(layoutInflater, parent, false)
+        val view = ItemFilmSmallBinding.inflate(layoutInflater, parent, false)
 
         return TopFilmsViewHolder(view)
     }
@@ -38,7 +38,7 @@ class TopFilmsAdapter(
 
     override fun getItemCount(): Int = items.count()
 
-    inner class TopFilmsViewHolder(val viewBinding: ItemFilmFewInfoBinding) :
+    inner class TopFilmsViewHolder(val viewBinding: ItemFilmSmallBinding) :
             RecyclerView.ViewHolder(viewBinding.root) {
 
         private val options: RequestOptions = RequestOptions()
