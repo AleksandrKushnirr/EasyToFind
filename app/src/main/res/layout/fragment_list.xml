@@ -12,10 +12,28 @@
         android:orientation="vertical"
         android:clipToPadding="false"
         android:paddingVertical="10dp"
+        android:visibility="invisible"
+        tools:visibility="visible"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/item_film_large"
         tools:itemCount="6"/>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        tools:visibility="gone"
+        app:shimmer_auto_start="true"
+        app:shimmer_clip_to_children="true"
+        app:shimmer_duration="800"
+        app:shimmer_fixed_width="250dp"
+        app:shimmer_tilt="20">
+
+        <include layout="@layout/layout_films_list_loading"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
