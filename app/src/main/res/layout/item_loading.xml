@@ -10,6 +10,8 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="7dp"
         app:indicatorColor="@color/primary"
+        app:indicatorSize="30dp"
+        android:indeterminate="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -1,5 +1,6 @@
 package com.kushnir.app.easytofind.ui.main.list_fragment.adapter
 
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.kushnir.app.easytofind.databinding.ItemFilmLargeBinding
 import com.kushnir.app.easytofind.databinding.ItemLoadingBinding
 import com.kushnir.app.easytofind.domain.enums.RatingColor
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
+import java.util.logging.Handler
 
 class FilmsListAdapter(
         private val clickToFilm: (FilmShortModel) -> Unit,
@@ -26,14 +28,19 @@ class FilmsListAdapter(
     fun setItems(items: MutableList<FilmShortModel>) {
         this.items.clear()
         this.items.addAll(items)
+        this.items.add(null)
         notifyDataSetChanged()
     }
 
     fun addItems(items: MutableList<FilmShortModel>) {
-        if (items.isEmpty()) isDataEnd = true
-
-        this.items.removeAt(itemCount - 1)
-        this.items.addAll(items)
+        if (items.isEmpty()) {
+            isDataEnd = true
+            this.items.removeAt(itemCount - 1)
+        } else {
+            this.items.removeAt(itemCount - 1)
+            this.items.addAll(items)
+            this.items.add(null)
+        }
         notifyDataSetChanged()
     }
 
@@ -61,8 +68,6 @@ class FilmsListAdapter(
 
         holder.bindTo(item)
         if (position == itemCount - 1 && !isDataEnd) {
-            items.add(null)
-            notifyItemInserted(itemCount - 1)
             loadMore()
         }
     }

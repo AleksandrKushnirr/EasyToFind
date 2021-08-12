@@ -6,7 +6,9 @@ import android.os.Looper
 import android.view.Gravity
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -15,6 +17,7 @@ import com.kushnir.app.easytofind.R
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
 import com.kushnir.app.easytofind.databinding.FragmentTopFilmsBinding
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
+import com.kushnir.app.easytofind.ui.main.list_fragment.FilmsListFragment
 import com.kushnir.app.easytofind.ui.main.top.adapter.TopFilmsAdapter
 import com.kushnir.app.easytofind.utils.checkError
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -62,7 +65,26 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
 
     private fun setListeners() {
         viewBinding.apply {
+            btnViewMoreBest.setOnClickListener {
+                findNavController().navigate(
+                        R.id.action_topFilmsFragment_to_filmsListFragment,
+                        bundleOf("list_type" to FilmsListFragment.BEST_FILMS_LIST_TYPE)
+                )
+            }
 
+            btnViewMorePopular.setOnClickListener {
+                findNavController().navigate(
+                        R.id.action_topFilmsFragment_to_filmsListFragment,
+                        bundleOf("list_type" to FilmsListFragment.POPULAR_FILMS_LIST_TYPE)
+                )
+            }
+
+            btnViewMoreAwaite.setOnClickListener {
+                findNavController().navigate(
+                        R.id.action_topFilmsFragment_to_filmsListFragment,
+                        bundleOf("list_type" to FilmsListFragment.AWAIT_FILMS_LIST_TYPE)
+                )
+            }
         }
     }
 

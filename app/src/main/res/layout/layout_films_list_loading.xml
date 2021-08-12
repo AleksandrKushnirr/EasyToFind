@@ -22,6 +22,12 @@
         <include layout="@layout/layout_item_film_list"/>
 
         <include layout="@layout/layout_item_film_list"/>
+
+        <include layout="@layout/layout_item_film_list"/>
+
+        <include layout="@layout/layout_item_film_list"/>
+
+        <include layout="@layout/layout_item_film_list"/>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
