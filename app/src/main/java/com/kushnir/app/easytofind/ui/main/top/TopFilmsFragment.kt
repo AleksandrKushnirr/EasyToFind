@@ -31,6 +31,12 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
     private var popularFilmsAdapter: TopFilmsAdapter? = null
     private var awaitFilmsAdapter: TopFilmsAdapter? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.getContent()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -38,8 +44,6 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
         setListeners()
         setObservers()
         configureAdapters()
-
-        viewModel.getContent()
     }
 
     private fun initViews() {

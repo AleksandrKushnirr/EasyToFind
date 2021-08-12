@@ -3,7 +3,9 @@ package com.kushnir.app.easytofind.ui.main.list_fragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kushnir.app.easytofind.R
@@ -34,10 +36,32 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
+        setListeners()
         configureAdapter()
         setObservers()
 
         viewModel.getFilms(args.listType, 1)
+    }
+
+    private fun initViews() {
+        viewBinding.apply {
+            tvTitle.text =
+                    when (args.listType) {
+                        BEST_FILMS_LIST_TYPE -> resources.getString(R.string.tv_top_best_films)
+                        POPULAR_FILMS_LIST_TYPE -> resources.getString(R.string.tv_top_popular_films)
+                        AWAIT_FILMS_LIST_TYPE -> resources.getString(R.string.tv_top_await_films)
+                        else -> ""
+                    }
+        }
+    }
+
+    private fun setListeners() {
+        viewBinding.apply {
+            btnBack.setOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
     }
 
     private fun setObservers() {
@@ -87,7 +111,7 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
     private fun setLoading(isLoading: Boolean) {
         viewBinding.shimmerLoading.visibility =
                 if (isLoading) View.VISIBLE else View.GONE
-        viewBinding.recyclerView.visibility =
+        viewBinding.layoutContent.visibility =
                 if (isLoading) View.INVISIBLE else View.VISIBLE
     }
 }
