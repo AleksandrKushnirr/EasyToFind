@@ -20,4 +20,7 @@
     <!--Texts-->
     <string name="txt_error">An error has occurred</string>
     <string name="txt_failed_connect_error">Failed connect to server. Please, check your internet connection or try again later.</string>
+
+    <!--Transition names-->
+    <string name="transition_name_preview_to_details">transition_name_preview_to_details</string>
 </resources>

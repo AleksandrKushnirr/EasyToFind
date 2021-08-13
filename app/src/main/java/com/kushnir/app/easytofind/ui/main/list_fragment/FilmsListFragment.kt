@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import by.kirich1409.viewbindingdelegate.viewBinding
@@ -33,6 +35,12 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
     private var currentPage = 0
     private var totalPages = 0
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.getFilms(args.listType, 1)
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -40,8 +48,6 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
         setListeners()
         configureAdapter()
         setObservers()
-
-        viewModel.getFilms(args.listType, 1)
     }
 
     private fun initViews() {
@@ -87,15 +93,26 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
 
     private fun configureAdapter() {
         adapter = FilmsListAdapter(
-                { handleClickToFilm(it) },
+                { filmModel, transitionView ->
+                    handleClickToFilm(filmModel, transitionView)
+                },
                 { handleClickToLikeFilm(it) },
                 { handleLoadMore() }
         )
         viewBinding.recyclerView.adapter = adapter
     }
 
-    private fun handleClickToFilm(model: FilmShortModel) {
-        Toast.makeText(context, "handleClickToFilm: $model", Toast.LENGTH_SHORT).show()
+    private fun handleClickToFilm(model: FilmShortModel, transitionView: View) {
+        findNavController().navigate(
+                R.id.action_filmsListFragment_to_filmDetailsFragment,
+                bundleOf(
+                        "film_name" to model.name,
+                        "film_id" to model.id,
+                        "film_preview" to model.posterUrl
+                ),
+                null,
+                FragmentNavigatorExtras(transitionView to resources.getString(R.string.transition_name_preview_to_details))
+        )
     }
 
     private fun handleClickToLikeFilm(filmId: Int) {

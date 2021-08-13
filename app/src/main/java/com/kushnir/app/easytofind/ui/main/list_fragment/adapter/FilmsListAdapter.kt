@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -17,7 +18,7 @@ import com.kushnir.app.easytofind.domain.models.FilmShortModel
 import java.util.logging.Handler
 
 class FilmsListAdapter(
-        private val clickToFilm: (FilmShortModel) -> Unit,
+        private val clickToFilm: (FilmShortModel, View) -> Unit,
         private val clickToLike: (Int) -> Unit,
         private val loadMore: () -> Unit
 ): RecyclerView.Adapter<FilmsListAdapter.FilmsListViewHolder>() {
@@ -37,7 +38,7 @@ class FilmsListAdapter(
             isDataEnd = true
             this.items.removeAt(itemCount - 1)
         } else {
-            this.items.removeAt(itemCount - 1)
+            if (this.items.isNotEmpty()) this.items.removeAt(itemCount - 1)
             this.items.addAll(items)
             this.items.add(null)
         }
@@ -128,7 +129,10 @@ class FilmsListAdapter(
                     }
                     tvRating.text = it.rating
 
-                    root.setOnClickListener { clickToFilm(item) }
+                    root.setOnClickListener {
+                        ViewCompat.setTransitionName(ivPreview, root.context.getString(R.string.transition_name_preview_to_details))
+                        clickToFilm(item, ivPreview)
+                    }
                     // TODO сделать клик по лайку
                 }
             }
