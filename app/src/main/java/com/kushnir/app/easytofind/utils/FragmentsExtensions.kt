@@ -1,11 +1,18 @@
 package com.kushnir.app.easytofind.utils
 
+import android.view.View
 import androidx.activity.OnBackPressedCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.kushnir.app.easytofind.R
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 fun Fragment.disableBackStack() {
     activity?.onBackPressedDispatcher?.addCallback(
@@ -32,5 +39,16 @@ fun Fragment.checkError(error: ResultWrapper.Error?) {
                 }
             }
         findNavController().navigate(R.id.errorDialog, bundle)
+    }
+}
+
+fun Fragment.delayOnLifecycle(
+        durationInMillis: Long,
+        dispatcher: CoroutineDispatcher = Dispatchers.Main,
+        actionBlock: () -> Unit
+) {
+    viewLifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
+        delay(durationInMillis)
+        actionBlock()
     }
 }
