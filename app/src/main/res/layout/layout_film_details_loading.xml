@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/fake_preview"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:background="@color/shimmer_loaders_color"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:id="@+id/fake_title"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="50dp"
+            android:background="@drawable/bg_shimmer_loaders"
+            app:layout_constraintTop_toBottomOf="@id/fake_preview"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/fake_title">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="200dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="220dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="160dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="100dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="18dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_shimmer_loaders" />
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

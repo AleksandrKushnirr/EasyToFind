@@ -6,6 +6,12 @@
     <string name="tv_top_best_films">Top best films</string>
     <string name="tv_top_popular_films">Top popular films</string>
     <string name="tv_top_await_films">Top await films</string>
+    <string name="tv_year">Year: </string>
+    <string name="tv_country">Country: </string>
+    <string name="tv_genres">Genres: </string>
+    <string name="tv_length">Length: </string>
+    <string name="tv_cast">Cast: </string>
+    <string name="tv_similar_films">Similar films: </string>
 
     <!--Buttons-->
     <string name="btn_ok">OK</string>
