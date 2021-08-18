@@ -1,64 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:fitsSystemWindows="true">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="500dp"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="@color/white"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/iv_preview"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager_film_images"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/place_holder_top_film_image"
-                android:scaleType="centerCrop"
-                android:transitionName="@string/transition_name_preview_to_details"/>
+                android:layout_height="550dp"
+                android:orientation="horizontal"
+                android:background="@color/semi_transparent_grey"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom">
+            <com.rd.PageIndicatorView
+                android:id="@+id/pageIndicatorView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:piv_animationType="thinWorm"
+                app:piv_dynamicCount="true"
+                app:piv_interactiveAnimation="true"
+                app:piv_selectedColor="@color/white"
+                app:piv_unselectedColor="@color/semi_transparent_white"
+                app:piv_viewPager="@id/view_pager_film_images"
+                app:piv_padding="12dp"
+                app:piv_radius="8dp"
+                app:layout_constraintStart_toStartOf="@id/view_pager_film_images"
+                app:layout_constraintEnd_toEndOf="@id/view_pager_film_images"
+                app:layout_constraintBottom_toBottomOf="@id/view_pager_film_images"/>
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cv_rating_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:cardCornerRadius="0dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="#a5d6a7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
 
-                    <ImageButton
-                        android:id="@+id/btn_back"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="7dp"
-                        android:padding="5dp"
-                        android:background="?attr/selectableItemBackgroundBorderless"
-                        android:src="@drawable/ic_back"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"/>
+                <TextView
+                    android:id="@+id/tv_rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="7dp"
+                    android:textColor="@color/white"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    tools:text="4.8"/>
 
-                    <TextView
-                        android:id="@+id/tv_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="30dp"
-                        android:textStyle="bold"
-                        android:textSize="18sp"
-                        android:textColor="@color/primary_text"
-                        android:text="@string/tv_top_best_films"
-                        app:layout_constraintTop_toTopOf="@id/btn_back"
-                        app:layout_constraintBottom_toBottomOf="@id/btn_back"
-                        app:layout_constraintEnd_toEndOf="parent"/>
+            </androidx.cardview.widget.CardView>
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.appcompat.widget.Toolbar>
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-    </com.google.android.material.appbar.AppBarLayout>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <ImageButton
+        android:id="@+id/image_btn_back"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:src="@drawable/ic_back"
+        android:scaleType="centerInside"
+        android:background="@drawable/bg_details_back_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ImageButton
+        android:id="@+id/image_btn_share"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:padding="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="7dp"
+        android:src="@drawable/ic_share"
+        android:scaleType="centerInside"
+        android:background="@drawable/bg_details_back_btn"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout >
