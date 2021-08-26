@@ -53,7 +53,8 @@ class TopFilmsAdapter(
 
                 Glide.with(root).clear(ivFilmMainImage)
                 Glide.with(root)
-                        .load(item.posterUrl)
+                        .load(item.poster.image)
+                        .thumbnail(Glide.with(root).load(item.poster.preview))
                         .apply(options)
                         .into(ivFilmMainImage)
 

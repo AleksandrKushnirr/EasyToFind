@@ -4,11 +4,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
-import com.kushnir.app.easytofind.domain.FilmsInteractor
+import com.kushnir.app.easytofind.domain.TopFilmsInteractor
 import com.kushnir.app.easytofind.domain.models.TopFilmsModel
 import kotlinx.coroutines.launch
 
-class FilmsListViewModel(private val interactor: FilmsInteractor) : ViewModel() {
+class FilmsListViewModel(private val interactor: TopFilmsInteractor) : ViewModel() {
 
     val filmsLiveData = MutableLiveData<ResultWrapper<TopFilmsModel>>()
     val loadingStateLiveData = MutableLiveData<Boolean>()

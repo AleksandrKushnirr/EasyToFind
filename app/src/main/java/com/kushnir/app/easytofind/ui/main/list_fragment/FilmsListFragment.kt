@@ -93,25 +93,17 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
 
     private fun configureAdapter() {
         adapter = FilmsListAdapter(
-                { filmModel, transitionView ->
-                    handleClickToFilm(filmModel, transitionView)
-                },
+                { handleClickToFilm(it) },
                 { handleClickToLikeFilm(it) },
                 { handleLoadMore() }
         )
         viewBinding.recyclerView.adapter = adapter
     }
 
-    private fun handleClickToFilm(model: FilmShortModel, transitionView: View) {
+    private fun handleClickToFilm(model: FilmShortModel) {
         findNavController().navigate(
                 R.id.action_filmsListFragment_to_filmDetailsFragment,
-                bundleOf(
-                        "film_name" to model.name,
-                        "film_id" to model.id,
-                        "film_preview" to model.posterUrl
-                ),
-                null,
-                FragmentNavigatorExtras(transitionView to resources.getString(R.string.transition_name_preview_to_details))
+                bundleOf("film_id" to model.id)
         )
     }
 

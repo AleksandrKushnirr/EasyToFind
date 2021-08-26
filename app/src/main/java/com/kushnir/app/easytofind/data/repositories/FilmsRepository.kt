@@ -1,6 +1,6 @@
 package com.kushnir.app.easytofind.data.repositories
 
-import com.kushnir.app.easytofind.data.models.responses.TopFilmsResponse
+import com.kushnir.app.easytofind.data.models.responses.*
 import com.kushnir.app.easytofind.data.repositories.base.BaseRepository
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
 import com.kushnir.app.easytofind.data.service.ApiService
@@ -31,6 +31,30 @@ class FilmsRepository(private val service: ApiService) : BaseRepository() {
     suspend fun getTopAwaitFilms(page: Int): ResultWrapper<TopFilmsResponse> {
         return safeApiCall(dispatcher) {
             service.getTopFilms(TOP_AWAIT_FILMS, page)
+        }
+    }
+
+    suspend fun getFilmDetails(id: Int): ResultWrapper<FilmDetailsResponse> {
+        return safeApiCall(dispatcher) {
+            service.getFilmDetailsById(id)
+        }
+    }
+
+    suspend fun getFilmStaff(id: Int): ResultWrapper<List<StaffResponse>> {
+        return safeApiCall(dispatcher) {
+            service.getStaffByFilmId(id)
+        }
+    }
+
+    suspend fun getSimilarFilmsByFilmId(id: Int): ResultWrapper<ListResponse<SimilarFilmsResponse>> {
+        return safeApiCall(dispatcher) {
+            service.getSimilarsByFilmId(id)
+        }
+    }
+
+    suspend fun getFilmImages(id: Int): ResultWrapper<FilmImagesResponse> {
+        return safeApiCall(dispatcher) {
+            service.getImagesByFilmId(id)
         }
     }
 }

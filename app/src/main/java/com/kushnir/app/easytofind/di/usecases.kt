@@ -1,10 +1,13 @@
 package com.kushnir.app.easytofind.di
 
-import com.kushnir.app.easytofind.domain.FilmsInteractor
+import com.kushnir.app.easytofind.domain.FilmDetailsInteractor
+import com.kushnir.app.easytofind.domain.TopFilmsInteractor
 import org.koin.dsl.module
 
 val useCasesModule = module {
 
-    factory { FilmsInteractor(get()) }
+    factory { TopFilmsInteractor(get()) }
+
+    factory { FilmDetailsInteractor(get()) }
 
 }

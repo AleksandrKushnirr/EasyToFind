@@ -146,7 +146,10 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
     }
 
     private fun handleClickToFilm(model: FilmShortModel) {
-        Toast.makeText(context, "handleClickToFilm: $model", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(
+            R.id.action_topFilmsFragment_to_filmDetailsFragment,
+            bundleOf("film_id" to model.id)
+        )
     }
 
     private fun handleClickToLikeFilm(filmId: Int) {

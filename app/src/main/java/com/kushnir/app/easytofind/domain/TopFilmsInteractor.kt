@@ -4,10 +4,11 @@ import com.kushnir.app.easytofind.data.repositories.FilmsRepository
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
 import com.kushnir.app.easytofind.domain.enums.RatingColor
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
+import com.kushnir.app.easytofind.domain.models.ImageModel
 import com.kushnir.app.easytofind.domain.models.TopFilmsModel
 import kotlinx.coroutines.delay
 
-class FilmsInteractor(private val repository: FilmsRepository) {
+class TopFilmsInteractor(private val repository: FilmsRepository) {
 
     suspend fun getRandomBestFilms(): ResultWrapper<List<FilmShortModel>> {
         val firstPageResponse = repository.getTopBestFilms(1)
@@ -24,7 +25,10 @@ class FilmsInteractor(private val repository: FilmsRepository) {
                             countries = response.countries.map { it.country },
                             genres = response.genres.map { it.genre },
                             rating = response.rating,
-                            posterUrl = response.posterUrl
+                            poster = ImageModel(
+                                    image = response.posterUrl,
+                                    preview = response.posterUrlPreview
+                            )
                     )
                 }.shuffled())
             } else {
@@ -51,7 +55,10 @@ class FilmsInteractor(private val repository: FilmsRepository) {
                                     countries = it.countries.map { it.country },
                                     genres = it.genres.map { it.genre },
                                     rating = getDoubleRatingByStringRating(it.rating).toString(),
-                                    posterUrl = it.posterUrl,
+                                    poster = ImageModel(
+                                            image = it.posterUrl,
+                                            preview = it.posterUrlPreview
+                                    ),
                                     ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating))
                             )
                         }
@@ -77,7 +84,10 @@ class FilmsInteractor(private val repository: FilmsRepository) {
                             countries = response.countries.map { it.country },
                             genres = response.genres.map { it.genre },
                             rating = response.rating,
-                            posterUrl = response.posterUrl
+                            poster = ImageModel(
+                                    image = response.posterUrl,
+                                    preview = response.posterUrlPreview
+                            )
                     )
                 }.shuffled())
             } else {
@@ -104,7 +114,10 @@ class FilmsInteractor(private val repository: FilmsRepository) {
                                         countries = it.countries.map { it.country },
                                         genres = it.genres.map { it.genre },
                                         rating = getDoubleRatingByStringRating(it.rating).toString(),
-                                        posterUrl = it.posterUrl,
+                                        poster = ImageModel(
+                                                image = it.posterUrl,
+                                                preview = it.posterUrlPreview
+                                        ),
                                         ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating))
                                 )
                             }
@@ -130,7 +143,10 @@ class FilmsInteractor(private val repository: FilmsRepository) {
                             countries = response.countries.map { it.country },
                             genres = response.genres.map { it.genre },
                             rating = response.rating,
-                            posterUrl = response.posterUrl
+                            poster = ImageModel(
+                                    image = response.posterUrl,
+                                    preview = response.posterUrlPreview
+                            )
                     )
                 }.shuffled())
             } else {
@@ -157,7 +173,10 @@ class FilmsInteractor(private val repository: FilmsRepository) {
                                         countries = it.countries.map { it.country },
                                         genres = it.genres.map { it.genre },
                                         rating = getDoubleRatingByStringRating(it.rating).toString(),
-                                        posterUrl = it.posterUrl,
+                                        poster = ImageModel(
+                                                image = it.posterUrl,
+                                                preview = it.posterUrlPreview
+                                        ),
                                         ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating))
                                 )
                             }

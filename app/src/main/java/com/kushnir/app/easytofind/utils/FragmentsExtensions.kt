@@ -1,11 +1,11 @@
 package com.kushnir.app.easytofind.utils
 
-import android.view.View
+import android.content.Intent
 import androidx.activity.OnBackPressedCallback
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.coroutineScope
-import androidx.lifecycle.findViewTreeLifecycleOwner
 import androidx.navigation.fragment.findNavController
 import com.kushnir.app.easytofind.R
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
@@ -13,6 +13,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
 
 fun Fragment.disableBackStack() {
     activity?.onBackPressedDispatcher?.addCallback(
@@ -43,12 +44,21 @@ fun Fragment.checkError(error: ResultWrapper.Error?) {
 }
 
 fun Fragment.delayOnLifecycle(
-        durationInMillis: Long,
-        dispatcher: CoroutineDispatcher = Dispatchers.Main,
-        actionBlock: () -> Unit
+    durationInMillis: Long,
+    dispatcher: CoroutineDispatcher = Dispatchers.Main,
+    actionBlock: () -> Unit
 ) {
     viewLifecycleOwner.lifecycle.coroutineScope.launch(dispatcher) {
         delay(durationInMillis)
         actionBlock()
     }
+}
+
+fun Fragment.shareUrl(url: String, title: String) {
+    val intent = Intent(Intent.ACTION_SEND).apply {
+        type = "text/plain"
+        putExtra(Intent.EXTRA_SUBJECT, title)
+        putExtra(Intent.EXTRA_TEXT, url)
+    }
+    startActivity(intent)
 }

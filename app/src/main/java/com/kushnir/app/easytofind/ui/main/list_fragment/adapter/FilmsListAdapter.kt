@@ -18,7 +18,7 @@ import com.kushnir.app.easytofind.domain.models.FilmShortModel
 import java.util.logging.Handler
 
 class FilmsListAdapter(
-        private val clickToFilm: (FilmShortModel, View) -> Unit,
+        private val clickToFilm: (FilmShortModel) -> Unit,
         private val clickToLike: (Int) -> Unit,
         private val loadMore: () -> Unit
 ): RecyclerView.Adapter<FilmsListAdapter.FilmsListViewHolder>() {
@@ -98,7 +98,8 @@ class FilmsListAdapter(
                 item?.let {
                     Glide.with(root).clear(ivPreview)
                     Glide.with(root)
-                            .load(it.posterUrl)
+                            .load(it.poster.image)
+                            .thumbnail(Glide.with(root).load(it.poster.preview))
                             .apply(options)
                             .into(ivPreview)
 
@@ -130,8 +131,7 @@ class FilmsListAdapter(
                     tvRating.text = it.rating
 
                     root.setOnClickListener {
-                        ViewCompat.setTransitionName(ivPreview, root.context.getString(R.string.transition_name_preview_to_details))
-                        clickToFilm(item, ivPreview)
+                        clickToFilm(item)
                     }
                     // TODO сделать клик по лайку
                 }

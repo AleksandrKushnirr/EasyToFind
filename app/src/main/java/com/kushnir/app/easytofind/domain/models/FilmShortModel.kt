@@ -10,6 +10,6 @@ data class FilmShortModel(
     val countries : List<String>,
     val genres : List<String>,
     val rating : String,
-    val posterUrl : String,
+    val poster : ImageModel,
     val ratingColor: RatingColor? = null
 )

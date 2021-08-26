@@ -17,6 +17,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@android:anim/slide_in_left"
             app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_topFilmsFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -58,16 +65,16 @@
         tools:layout="@layout/fragment_film_details">
 
         <argument
-            android:name="film_name"
-            app:argType="string"/>
-
-        <argument
             android:name="film_id"
             app:argType="integer"/>
 
-        <argument
-            android:name="film_preview"
-            app:argType="string"/>
+        <action
+            android:id="@+id/action_filmDetailsFragment_self"
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
 
     </fragment>
 
