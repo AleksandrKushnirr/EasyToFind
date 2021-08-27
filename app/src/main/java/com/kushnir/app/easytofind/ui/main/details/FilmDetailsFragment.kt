@@ -160,7 +160,12 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
         viewBinding.apply {
             tvFilmName.text = model.name
             tvYearValue.text = model.year
-            tvLengthValue.text = model.filmLength
+            if (model.filmLength != null) {
+                tvLengthValue.text = model.filmLength
+            } else {
+                tvLength.visibility = View.GONE
+                tvLengthValue.visibility = View.GONE
+            }
 
             var countries = ""
             for (country in model.countries) {
@@ -174,7 +179,11 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
             }
             tvGenresValue.text = if (genres.length > 2) genres.subSequence(0, genres.length - 2).toString() else ""
 
-            tvDetailsValue.text = model.description
+            if (model.description != null) {
+                tvDetailsValue.text = model.description
+            } else {
+                tvDetailsValue.visibility = View.GONE
+            }
 
             cvRatingHolder.apply {
                 when(model.ratingColor) {

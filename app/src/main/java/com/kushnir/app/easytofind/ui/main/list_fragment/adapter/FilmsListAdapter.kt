@@ -36,7 +36,7 @@ class FilmsListAdapter(
     fun addItems(items: MutableList<FilmShortModel>) {
         if (items.isEmpty()) {
             isDataEnd = true
-            this.items.removeAt(itemCount - 1)
+            if (this.items.isNotEmpty()) this.items.removeAt(itemCount - 1)
         } else {
             if (this.items.isNotEmpty()) this.items.removeAt(itemCount - 1)
             this.items.addAll(items)

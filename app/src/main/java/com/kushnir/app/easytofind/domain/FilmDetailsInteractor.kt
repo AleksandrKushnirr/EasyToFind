@@ -7,6 +7,7 @@ import com.kushnir.app.easytofind.domain.models.CastModel
 import com.kushnir.app.easytofind.domain.models.FilmDetailsModel
 import com.kushnir.app.easytofind.domain.models.ImageModel
 import com.kushnir.app.easytofind.domain.models.SimilarFilmModel
+import kotlin.math.roundToInt
 
 class FilmDetailsInteractor(private val repository: FilmsRepository) {
 
@@ -94,11 +95,11 @@ class FilmDetailsInteractor(private val repository: FilmsRepository) {
     }
 
     private fun getDoubleRating(rating: String, ratingAwait: String): Double {
-        return if (rating != "0") {
+        return if (rating != "0" && rating != "0.0") {
             rating.toDouble()
         } else {
-            if (ratingAwait != "null" && ratingAwait.contains("%")) {
-                ratingAwait.replace("%", "").toDouble()/10
+            if (ratingAwait != "null") {
+                ratingAwait.toDouble().roundToInt()/10.0
             } else {
                 0.0
             }
