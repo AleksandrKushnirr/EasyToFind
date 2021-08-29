@@ -11,5 +11,6 @@ data class FilmShortModel(
     val genres : List<String>,
     val rating : String,
     val poster : ImageModel,
-    val ratingColor: RatingColor? = null
+    val ratingColor: RatingColor? = null,
+    val isLiked: Boolean = false
 )

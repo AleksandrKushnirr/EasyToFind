@@ -126,29 +126,20 @@ class TopFilmsFragment : Fragment(R.layout.fragment_top_films) {
     }
 
     private fun configureAdapters() {
-        bestFilmsAdapter = TopFilmsAdapter(
-                { handleClickToFilm(it) },
-                { handleClickToLikeFilm(it) }
-        )
+        bestFilmsAdapter = TopFilmsAdapter{ handleClickToFilm(it) }
         viewBinding.recyclerViewBestFilms.adapter = bestFilmsAdapter
 
-        popularFilmsAdapter = TopFilmsAdapter(
-                { handleClickToFilm(it) },
-                { handleClickToLikeFilm(it) }
-        )
+        popularFilmsAdapter = TopFilmsAdapter{ handleClickToFilm(it) }
         viewBinding.recyclerViewPopularFilms.adapter = popularFilmsAdapter
 
-        awaitFilmsAdapter = TopFilmsAdapter(
-                { handleClickToFilm(it) },
-                { handleClickToLikeFilm(it) }
-        )
+        awaitFilmsAdapter = TopFilmsAdapter{ handleClickToFilm(it) }
         viewBinding.recyclerViewAwaitFilms.adapter = awaitFilmsAdapter
     }
 
-    private fun handleClickToFilm(model: FilmShortModel) {
+    private fun handleClickToFilm(id: Int) {
         findNavController().navigate(
             R.id.action_topFilmsFragment_to_filmDetailsFragment,
-            bundleOf("film_id" to model.id)
+            bundleOf("film_id" to id)
         )
     }
 

@@ -30,11 +30,22 @@
         android:name="com.kushnir.app.easytofind.ui.main.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search"/>
+
     <fragment
         android:id="@+id/likedFilmsFragment"
         android:name="com.kushnir.app.easytofind.ui.main.liked.LikedFilmsFragment"
         android:label="LikedFilmsFragment"
-        tools:layout="@layout/fragment_liked_films"/>
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/action_likedFilmsFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+
     <fragment
         android:id="@+id/remindersFragment"
         android:name="com.kushnir.app.easytofind.ui.main.reminders.RemindersFragment"

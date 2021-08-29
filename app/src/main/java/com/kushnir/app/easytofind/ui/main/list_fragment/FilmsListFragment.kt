@@ -94,21 +94,25 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
     private fun configureAdapter() {
         adapter = FilmsListAdapter(
                 { handleClickToFilm(it) },
-                { handleClickToLikeFilm(it) },
+                { model, isLiked -> handleClickToLikeFilm(model, isLiked) },
                 { handleLoadMore() }
         )
         viewBinding.recyclerView.adapter = adapter
     }
 
-    private fun handleClickToFilm(model: FilmShortModel) {
+    private fun handleClickToFilm(id: Int) {
         findNavController().navigate(
                 R.id.action_filmsListFragment_to_filmDetailsFragment,
-                bundleOf("film_id" to model.id)
+                bundleOf("film_id" to id)
         )
     }
 
-    private fun handleClickToLikeFilm(filmId: Int) {
-        Toast.makeText(context, "handleClickToLikeFilm: $filmId", Toast.LENGTH_SHORT).show()
+    private fun handleClickToLikeFilm(model: FilmShortModel, isLiked: Boolean) {
+        if (isLiked) {
+            viewModel.likeFilm(model)
+        } else {
+            viewModel.removeLike(model.id)
+        }
     }
 
     private fun handleLoadMore() {

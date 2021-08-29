@@ -1,5 +1,7 @@
 package com.kushnir.app.easytofind.domain
 
+import com.kushnir.app.easytofind.data.models.entity.Films
+import com.kushnir.app.easytofind.data.repositories.FilmsDBRepository
 import com.kushnir.app.easytofind.data.repositories.FilmsRepository
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
 import com.kushnir.app.easytofind.domain.enums.RatingColor
@@ -8,7 +10,10 @@ import com.kushnir.app.easytofind.domain.models.ImageModel
 import com.kushnir.app.easytofind.domain.models.TopFilmsModel
 import kotlinx.coroutines.delay
 
-class TopFilmsInteractor(private val repository: FilmsRepository) {
+class TopFilmsInteractor(
+        private val repository: FilmsRepository,
+        private val dbRepository: FilmsDBRepository
+) {
 
     suspend fun getRandomBestFilms(): ResultWrapper<List<FilmShortModel>> {
         val firstPageResponse = repository.getTopBestFilms(1)
@@ -41,6 +46,7 @@ class TopFilmsInteractor(private val repository: FilmsRepository) {
 
     suspend fun getBestFilms(page: Int): ResultWrapper<TopFilmsModel> {
         delay(1000)
+        val likedFilms = dbRepository.getAllLikedFilms()
         val response = repository.getTopBestFilms(page)
         if (response is ResultWrapper.Success) {
             return ResultWrapper.Success(
@@ -59,7 +65,8 @@ class TopFilmsInteractor(private val repository: FilmsRepository) {
                                             image = it.posterUrl,
                                             preview = it.posterUrlPreview
                                     ),
-                                    ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating))
+                                    ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating)),
+                                    isLiked = getIsLikedByLikedListAndFilmId(likedFilms, it.filmId)
                             )
                         }
                     )
@@ -100,6 +107,7 @@ class TopFilmsInteractor(private val repository: FilmsRepository) {
 
     suspend fun getPopularFilms(page: Int): ResultWrapper<TopFilmsModel> {
         delay(1000)
+        val likedFilms = dbRepository.getAllLikedFilms()
         val response = repository.getTopPopularFilms(page)
         if (response is ResultWrapper.Success) {
             return ResultWrapper.Success(
@@ -118,7 +126,8 @@ class TopFilmsInteractor(private val repository: FilmsRepository) {
                                                 image = it.posterUrl,
                                                 preview = it.posterUrlPreview
                                         ),
-                                        ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating))
+                                        ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating)),
+                                        isLiked = getIsLikedByLikedListAndFilmId(likedFilms, it.filmId)
                                 )
                             }
                     )
@@ -159,6 +168,7 @@ class TopFilmsInteractor(private val repository: FilmsRepository) {
 
     suspend fun getAwaitFilms(page: Int): ResultWrapper<TopFilmsModel> {
         delay(1000)
+        val likedFilms = dbRepository.getAllLikedFilms()
         val response = repository.getTopAwaitFilms(page)
         if (response is ResultWrapper.Success) {
             return ResultWrapper.Success(
@@ -177,7 +187,8 @@ class TopFilmsInteractor(private val repository: FilmsRepository) {
                                                 image = it.posterUrl,
                                                 preview = it.posterUrlPreview
                                         ),
-                                        ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating))
+                                        ratingColor = RatingColor.fromDoubleValue(getDoubleRatingByStringRating(it.rating)),
+                                        isLiked = getIsLikedByLikedListAndFilmId(likedFilms, it.filmId)
                                 )
                             }
                     )
@@ -193,5 +204,12 @@ class TopFilmsInteractor(private val repository: FilmsRepository) {
         } else {
             rating.toDouble()
         }
+    }
+
+    private fun getIsLikedByLikedListAndFilmId(result: ResultWrapper<List<Films>>, id: Int): Boolean {
+        if (result is ResultWrapper.Success) {
+            result.value.forEach { if (it.id == id) return true }
+        }
+        return false
     }
 }

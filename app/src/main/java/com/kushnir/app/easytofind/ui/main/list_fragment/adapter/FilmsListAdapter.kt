@@ -1,11 +1,9 @@
 package com.kushnir.app.easytofind.ui.main.list_fragment.adapter
 
-import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -15,11 +13,10 @@ import com.kushnir.app.easytofind.databinding.ItemFilmLargeBinding
 import com.kushnir.app.easytofind.databinding.ItemLoadingBinding
 import com.kushnir.app.easytofind.domain.enums.RatingColor
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
-import java.util.logging.Handler
 
 class FilmsListAdapter(
-        private val clickToFilm: (FilmShortModel) -> Unit,
-        private val clickToLike: (Int) -> Unit,
+        private val clickToFilm: (Int) -> Unit,
+        private val clickToLike: (FilmShortModel, Boolean) -> Unit,
         private val loadMore: () -> Unit
 ): RecyclerView.Adapter<FilmsListAdapter.FilmsListViewHolder>() {
 
@@ -130,10 +127,10 @@ class FilmsListAdapter(
                     }
                     tvRating.text = it.rating
 
-                    root.setOnClickListener {
-                        clickToFilm(item)
-                    }
-                    // TODO сделать клик по лайку
+                    checkboxLike.isChecked = it.isLiked
+
+                    root.setOnClickListener { clickToFilm(item.id) }
+                    checkboxLike.setOnCheckedChangeListener { _, b -> clickToLike(item, b) }
                 }
             }
         }
@@ -145,9 +142,6 @@ class FilmsListAdapter(
 
         override fun bindTo(item: FilmShortModel?) {
 
-            viewBinding.apply {
-
-            }
         }
     }
 }

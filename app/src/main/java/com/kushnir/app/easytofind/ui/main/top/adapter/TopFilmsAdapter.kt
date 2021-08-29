@@ -11,8 +11,7 @@ import com.kushnir.app.easytofind.databinding.ItemSmallBinding
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
 
 class TopFilmsAdapter(
-        private val clickToFilm: (FilmShortModel) -> Unit,
-        private val clickToLike: (Int) -> Unit
+        private val clickToFilm: (Int) -> Unit
 ): RecyclerView.Adapter<TopFilmsAdapter.TopFilmsViewHolder>() {
 
     private val items: MutableList<FilmShortModel> = mutableListOf()
@@ -66,8 +65,7 @@ class TopFilmsAdapter(
                 }
                 tvShortInfo.text = subtitleInfo
 
-                ivFilmMainImage.setOnClickListener { clickToFilm(item) }
-                // TODO сделать клик по лайку
+                ivFilmMainImage.setOnClickListener { clickToFilm(item.id) }
             }
         }
     }
