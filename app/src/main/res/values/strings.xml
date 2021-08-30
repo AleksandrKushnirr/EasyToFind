@@ -27,4 +27,5 @@
     <!--Texts-->
     <string name="txt_error">An error has occurred</string>
     <string name="txt_failed_connect_error">Failed connect to server. Please, check your internet connection or try again later.</string>
+    <string name="txt_empty_list">The list is empty… \nAdd the first movie to the favorite list.</string>
 </resources>

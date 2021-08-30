@@ -13,7 +13,7 @@ val viewModelsModule = module {
 
     viewModel { FilmsListViewModel(get(), get()) }
     
-    viewModel { FilmDetailsViewModel(get()) }
+    viewModel { FilmDetailsViewModel(get(), get()) }
 
     viewModel { LikedFilmsViewModel(get()) }
 

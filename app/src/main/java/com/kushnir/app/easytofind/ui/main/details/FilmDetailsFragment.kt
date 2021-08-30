@@ -17,6 +17,7 @@ import com.kushnir.app.easytofind.databinding.FragmentFilmDetailsBinding
 import com.kushnir.app.easytofind.domain.enums.RatingColor
 import com.kushnir.app.easytofind.domain.models.CastModel
 import com.kushnir.app.easytofind.domain.models.FilmDetailsModel
+import com.kushnir.app.easytofind.domain.models.FilmShortModel
 import com.kushnir.app.easytofind.domain.models.SimilarFilmModel
 import com.kushnir.app.easytofind.ui.main.details.adapters.CastAdapter
 import com.kushnir.app.easytofind.ui.main.details.adapters.SimilarFilmsAdapter
@@ -35,8 +36,7 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
     private var castAdapter: CastAdapter? = null
     private var similarFilmsAdapter: SimilarFilmsAdapter? = null
 
-    private var webUrl: String? = null
-    private var filmName: String? = null
+    private var filmModel: FilmDetailsModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,10 +73,8 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
         viewBinding.apply {
             imageBtnBack.setOnClickListener { findNavController().popBackStack() }
             imageBtnShare.setOnClickListener {
-                webUrl?.let { url ->
-                    filmName?.let { name ->
-                        shareUrl(url, name)
-                    }
+                filmModel?.let {
+                    shareUrl(it.webUrl, it.name)
                 }
             }
             viewPagerFilmImages.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
@@ -84,6 +82,28 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
                     viewBinding.pageIndicatorView.setSelected(position)
                 }
             })
+            checkboxLike.setOnCheckedChangeListener { _, b ->
+                filmModel?.let {
+                    if (b) {
+                        viewModel.likeFilm(
+                                FilmShortModel(
+                                        id = it.filmId,
+                                        name = it.name,
+                                        year = it.year,
+                                        filmLength = it.filmLength,
+                                        countries = it.countries,
+                                        genres = it.genres,
+                                        rating = it.rating.toString(),
+                                        poster = it.poster,
+                                        ratingColor = it.ratingColor,
+                                        isLiked = true
+                                )
+                        )
+                    } else {
+                        viewModel.removeLike(it.filmId)
+                    }
+                }
+            }
         }
     }
 
@@ -92,8 +112,7 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
             when(it) {
                 is ResultWrapper.Success -> {
                     setFilmDetailsInfo(it.value)
-                    webUrl = it.value.webUrl
-                    filmName = it.value.name
+                    filmModel = it.value
                 }
                 is ResultWrapper.Error -> checkError(it)
             }
@@ -197,6 +216,8 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
             tvRating.text = model.rating.toString()
 
             viewPagerAdapter?.setMainPoster(model.poster)
+
+            checkboxLike.isChecked = model.isLiked
         }
     }
 

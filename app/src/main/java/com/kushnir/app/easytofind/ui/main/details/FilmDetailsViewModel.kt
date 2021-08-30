@@ -5,15 +5,16 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
 import com.kushnir.app.easytofind.domain.FilmDetailsInteractor
-import com.kushnir.app.easytofind.domain.models.CastModel
-import com.kushnir.app.easytofind.domain.models.FilmDetailsModel
-import com.kushnir.app.easytofind.domain.models.ImageModel
-import com.kushnir.app.easytofind.domain.models.SimilarFilmModel
+import com.kushnir.app.easytofind.domain.LikedFilmsInteractor
+import com.kushnir.app.easytofind.domain.models.*
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.launch
 
-class FilmDetailsViewModel(private val interactor: FilmDetailsInteractor) : ViewModel() {
+class FilmDetailsViewModel(
+        private val interactor: FilmDetailsInteractor,
+        private val likedFilmsInteractor: LikedFilmsInteractor
+) : ViewModel() {
 
     val filmDetailsLiveData = MutableLiveData<ResultWrapper<FilmDetailsModel>>()
     val filmImagesLiveData = MutableLiveData<ResultWrapper<List<ImageModel>>>()
@@ -32,6 +33,18 @@ class FilmDetailsViewModel(private val interactor: FilmDetailsInteractor) : View
             awaitAll(detailsRequest, imagesRequest, castRequest, similarFilmsRequest)
 
             loadingStateLiveData.postValue(false)
+        }
+    }
+
+    fun likeFilm(film: FilmShortModel) {
+        viewModelScope.launch {
+            likedFilmsInteractor.saveLikedFilm(film)
+        }
+    }
+
+    fun removeLike(id: Int) {
+        viewModelScope.launch {
+            likedFilmsInteractor.removeLikedFilm(id)
         }
     }
 }

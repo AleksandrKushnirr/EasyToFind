@@ -13,6 +13,7 @@
     <color name="divider">#BDBDBD</color>
     <color name="shimmer_loaders_color">#ECEFF1</color>
     <color name="shimmer_loaders_color_dark">#cfd8dc</color>
+    <color name="place_holder_color">#9E9E9E</color>
 
     <color name="icons_checked_color">#024969</color>
 

@@ -1,5 +1,7 @@
 package com.kushnir.app.easytofind.domain
 
+import com.kushnir.app.easytofind.data.models.entity.Films
+import com.kushnir.app.easytofind.data.repositories.FilmsDBRepository
 import com.kushnir.app.easytofind.data.repositories.FilmsRepository
 import com.kushnir.app.easytofind.data.repositories.base.ResultWrapper
 import com.kushnir.app.easytofind.domain.enums.RatingColor
@@ -9,13 +11,17 @@ import com.kushnir.app.easytofind.domain.models.ImageModel
 import com.kushnir.app.easytofind.domain.models.SimilarFilmModel
 import kotlin.math.roundToInt
 
-class FilmDetailsInteractor(private val repository: FilmsRepository) {
+class FilmDetailsInteractor(
+        private val repository: FilmsRepository,
+        private val dbRepository: FilmsDBRepository
+) {
 
     companion object {
         private const val PROFESSION_KEY_ACTOR = "ACTOR"
     }
 
     suspend fun getDetailsByFilmId(id: Int): ResultWrapper<FilmDetailsModel> {
+        val likedFilms = dbRepository.getAllLikedFilms()
         val response = repository.getFilmDetails(id)
         if (response is ResultWrapper.Success) {
             return ResultWrapper.Success(
@@ -35,7 +41,8 @@ class FilmDetailsInteractor(private val repository: FilmsRepository) {
                             countries = response.value.data.countries.map { it.country },
                             genres = response.value.data.genres.map { it.genre },
                             rating = getDoubleRating(response.value.rating.rating, response.value.rating.ratingAwait ?: "null"),
-                            ratingColor = RatingColor.fromDoubleValue(getDoubleRating(response.value.rating.rating, response.value.rating.ratingAwait ?: "null"))
+                            ratingColor = RatingColor.fromDoubleValue(getDoubleRating(response.value.rating.rating, response.value.rating.ratingAwait ?: "null")),
+                            isLiked = getIsLikedByLikedListAndFilmId(likedFilms, response.value.data.filmId)
                     )
             )
         } else {
@@ -104,5 +111,12 @@ class FilmDetailsInteractor(private val repository: FilmsRepository) {
                 0.0
             }
         }
+    }
+
+    private fun getIsLikedByLikedListAndFilmId(result: ResultWrapper<List<Films>>, id: Int): Boolean {
+        if (result is ResultWrapper.Success) {
+            result.value.forEach { if (it.id == id) return true }
+        }
+        return false
     }
 }

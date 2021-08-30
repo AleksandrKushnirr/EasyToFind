@@ -9,7 +9,7 @@ val useCasesModule = module {
 
     factory { TopFilmsInteractor(get(), get()) }
 
-    factory { FilmDetailsInteractor(get()) }
+    factory { FilmDetailsInteractor(get(), get()) }
 
     factory { LikedFilmsInteractor(get()) }
 

@@ -15,5 +15,6 @@ data class FilmDetailsModel(
         val countries : List<String>,
         val genres : List<String>,
         val rating : Double,
-        val ratingColor: RatingColor? = null
+        val ratingColor: RatingColor? = null,
+        val isLiked: Boolean
 )

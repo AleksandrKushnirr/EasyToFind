@@ -13,6 +13,7 @@ import com.kushnir.app.easytofind.databinding.FragmentListBinding
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
 import com.kushnir.app.easytofind.ui.main.liked.adapter.FilmsLikedListAdapter
 import com.kushnir.app.easytofind.utils.checkError
+import kotlinx.android.synthetic.main.fragment_list.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class LikedFilmsFragment : Fragment(R.layout.fragment_list) {
@@ -45,7 +46,16 @@ class LikedFilmsFragment : Fragment(R.layout.fragment_list) {
 
         viewModel.filmLiveData.observe(viewLifecycleOwner, {
             when(it) {
-                is ResultWrapper.Success -> adapter?.setItems(it.value as MutableList<FilmShortModel>)
+                is ResultWrapper.Success -> {
+                    if (it.value.isNotEmpty()) {
+                        adapter?.setItems(it.value as MutableList<FilmShortModel>)
+                        viewBinding.recyclerView.visibility = View.VISIBLE
+                        viewBinding.layoutEmptyList.visibility = View.GONE
+                    } else {
+                        viewBinding.recyclerView.visibility = View.GONE
+                        viewBinding.layoutEmptyList.visibility = View.VISIBLE
+                    }
+                }
                 is ResultWrapper.Error -> checkError(it)
             }
         })
