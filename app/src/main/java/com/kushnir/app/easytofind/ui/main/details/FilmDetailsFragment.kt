@@ -37,6 +37,7 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
     private var similarFilmsAdapter: SimilarFilmsAdapter? = null
 
     private var filmModel: FilmDetailsModel? = null
+    private var isFragmentStopped = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +52,12 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
         setListeners()
         setObservers()
         configureAdapters()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        isFragmentStopped = true
     }
 
     private fun initViews() {
@@ -84,6 +91,7 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
             })
             checkboxLike.setOnCheckedChangeListener { _, b ->
                 filmModel?.let {
+                    it.isLiked = b
                     if (b) {
                         viewModel.likeFilm(
                                 FilmShortModel(
@@ -111,8 +119,14 @@ class FilmDetailsFragment : Fragment(R.layout.fragment_film_details) {
         viewModel.filmDetailsLiveData.observe(viewLifecycleOwner, {
             when(it) {
                 is ResultWrapper.Success -> {
-                    setFilmDetailsInfo(it.value)
-                    filmModel = it.value
+                    if (!isFragmentStopped) {
+                        filmModel = it.value
+                    } else {
+                        isFragmentStopped = false
+                    }
+                    filmModel?.let { filmNotNul ->
+                        setFilmDetailsInfo(filmNotNul)
+                    }
                 }
                 is ResultWrapper.Error -> checkError(it)
             }

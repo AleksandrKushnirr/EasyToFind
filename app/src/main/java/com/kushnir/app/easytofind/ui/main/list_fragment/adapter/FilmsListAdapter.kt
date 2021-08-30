@@ -13,6 +13,7 @@ import com.kushnir.app.easytofind.databinding.ItemFilmLargeBinding
 import com.kushnir.app.easytofind.databinding.ItemLoadingBinding
 import com.kushnir.app.easytofind.domain.enums.RatingColor
 import com.kushnir.app.easytofind.domain.models.FilmShortModel
+import timber.log.Timber
 
 class FilmsListAdapter(
         private val clickToFilm: (Int) -> Unit,
@@ -64,7 +65,7 @@ class FilmsListAdapter(
     override fun onBindViewHolder(holder: FilmsListViewHolder, position: Int) {
         val item = items[position]
 
-        holder.bindTo(item)
+        holder.bindTo(item, position)
         if (position == itemCount - 1 && !isDataEnd) {
             loadMore()
         }
@@ -76,7 +77,7 @@ class FilmsListAdapter(
             if (items[position] != null) R.layout.item_film_large else R.layout.item_loading
 
     abstract inner class FilmsListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        abstract fun bindTo(item: FilmShortModel?)
+        abstract fun bindTo(item: FilmShortModel?, position: Int)
     }
 
     inner class FilmsViewHolder(
@@ -89,7 +90,12 @@ class FilmsListAdapter(
                 .placeholder(R.drawable.place_holder_top_film_image)
                 .error(R.drawable.place_holder_top_film_image)
 
-        override fun bindTo(item: FilmShortModel?) {
+        override fun bindTo(item: FilmShortModel?, position: Int) {
+
+            if (item?.name == "1+1") {
+                Timber.d("1+1 bindTo")
+                Timber.d("1+1 isLiked: ${item.isLiked}")
+            }
 
             viewBinding.apply {
                 item?.let {
@@ -130,7 +136,14 @@ class FilmsListAdapter(
                     checkboxLike.isChecked = it.isLiked
 
                     root.setOnClickListener { clickToFilm(item.id) }
-                    checkboxLike.setOnCheckedChangeListener { _, b -> clickToLike(item, b) }
+
+                    checkboxLike.setOnClickListener {
+                        val oldIsLiked = items[position]?.isLiked ?: false
+                        items[position]?.isLiked = !oldIsLiked
+                        notifyItemChanged(position)
+
+                        clickToLike(item, !oldIsLiked)
+                    }
                 }
             }
         }
@@ -140,7 +153,7 @@ class FilmsListAdapter(
             val viewBinding: ItemLoadingBinding
     ) : FilmsListViewHolder(viewBinding.root) {
 
-        override fun bindTo(item: FilmShortModel?) {
+        override fun bindTo(item: FilmShortModel?, position: Int) {
 
         }
     }

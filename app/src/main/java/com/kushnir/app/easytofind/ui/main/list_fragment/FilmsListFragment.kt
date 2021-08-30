@@ -35,9 +35,12 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
     private var currentPage = 0
     private var totalPages = 0
 
+    private var isFragmentStopped = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        configureAdapter()
         viewModel.getFilms(args.listType, 1)
     }
 
@@ -46,8 +49,13 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
 
         initViews()
         setListeners()
-        configureAdapter()
         setObservers()
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        isFragmentStopped = true
     }
 
     private fun initViews() {
@@ -59,7 +67,10 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
                         AWAIT_FILMS_LIST_TYPE -> resources.getString(R.string.tv_top_await_films)
                         else -> ""
                     }
+
+            recyclerView.adapter = adapter
         }
+
     }
 
     private fun setListeners() {
@@ -76,17 +87,21 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
         })
 
         viewModel.filmsLiveData.observe(viewLifecycleOwner, { result ->
-            when(result) {
-                is ResultWrapper.Success -> {
-                    currentPage++
-                    totalPages = result.value.pagesCount
-                    if (currentPage == 1) {
-                        adapter?.setItems(result.value.films as MutableList<FilmShortModel>)
-                    } else {
-                        adapter?.addItems(result.value.films as MutableList<FilmShortModel>)
+            if (!isFragmentStopped) {
+                when(result) {
+                    is ResultWrapper.Success -> {
+                        currentPage++
+                        totalPages = result.value.pagesCount
+                        if (currentPage == 1) {
+                            adapter?.setItems(result.value.films as MutableList<FilmShortModel>)
+                        } else {
+                            adapter?.addItems(result.value.films as MutableList<FilmShortModel>)
+                        }
                     }
+                    is ResultWrapper.Error -> checkError(result)
                 }
-                is ResultWrapper.Error -> checkError(result)
+            } else {
+                isFragmentStopped = false
             }
         })
     }
@@ -97,7 +112,6 @@ class FilmsListFragment : Fragment(R.layout.fragment_list)  {
                 { model, isLiked -> handleClickToLikeFilm(model, isLiked) },
                 { handleLoadMore() }
         )
-        viewBinding.recyclerView.adapter = adapter
     }
 
     private fun handleClickToFilm(id: Int) {
