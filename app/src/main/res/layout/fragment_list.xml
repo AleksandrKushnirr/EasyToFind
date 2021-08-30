@@ -62,7 +62,7 @@
                 android:id="@+id/ic_placeholder"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
-                android:layout_marginBottom="100dp"
+                android:layout_marginBottom="130dp"
                 android:src="@drawable/place_holder_movie"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
