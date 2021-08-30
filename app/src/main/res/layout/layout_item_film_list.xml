@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="120dp"
+    android:layout_marginTop="14dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <View
+        android:id="@+id/fake_preview"
+        android:layout_width="120dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_shimmer_loaders"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <View
+        android:id="@+id/fake_fields_1"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_shimmer_loaders"
+        app:layout_constraintStart_toEndOf="@id/fake_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fake_fields_2"/>
+
+    <View
+        android:id="@+id/fake_fields_2"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_shimmer_loaders"
+        app:layout_constraintStart_toEndOf="@id/fake_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fake_fields_1"
+        app:layout_constraintBottom_toTopOf="@id/fake_fields_3"/>
+
+    <View
+        android:id="@+id/fake_fields_3"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_shimmer_loaders"
+        app:layout_constraintStart_toEndOf="@id/fake_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fake_fields_2"
+        app:layout_constraintBottom_toTopOf="@id/fake_fields_4"/>
+
+    <View
+        android:id="@+id/fake_fields_4"
+        android:layout_width="0dp"
+        android:layout_height="18dp"
+        android:layout_marginHorizontal="20dp"
+        android:background="@drawable/bg_shimmer_loaders"
+        app:layout_constraintStart_toEndOf="@id/fake_preview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/fake_fields_3"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

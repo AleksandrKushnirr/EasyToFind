@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.kushnir.app.easytofind.ui.splash.SplashFragment"
+        android:label="SplashFragment"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.MainFragment"
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main"/>
+
+    <dialog
+        android:id="@+id/errorDialog"
+        android:name="com.kushnir.app.easytofind.ui.dialogs.ErrorDialog"
+        android:label="ErrorDialog"
+        tools:layout="@layout/dialog_error">
+
+        <argument
+            android:name="error"
+            app:argType="com.kushnir.app.easytofind.data.models.responses.BaseErrorMessage"/>
+
+        <argument
+            android:name="error_string"
+            app:argType="string"/>
+    </dialog>
+</navigation>

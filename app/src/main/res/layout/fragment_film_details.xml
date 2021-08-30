@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/layout_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="100dp">
+
+                <androidx.viewpager2.widget.ViewPager2
+                    android:id="@+id/view_pager_film_images"
+                    android:layout_width="match_parent"
+                    android:layout_height="550dp"
+                    android:orientation="horizontal"
+                    android:background="@color/semi_transparent_grey"
+                    android:visibility="visible"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.rd.PageIndicatorView
+                    android:id="@+id/pageIndicatorView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    app:piv_dynamicCount="true"
+                    app:piv_selectedColor="@color/white"
+                    app:piv_unselectedColor="@color/semi_transparent_white"
+                    app:piv_padding="6dp"
+                    app:piv_radius="3.5dp"
+                    app:layout_constraintStart_toStartOf="@id/view_pager_film_images"
+                    app:layout_constraintEnd_toEndOf="@id/view_pager_film_images"
+                    app:layout_constraintBottom_toBottomOf="@id/view_pager_film_images"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cv_rating_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#a5d6a7"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/view_pager_film_images">
+
+                    <TextView
+                        android:id="@+id/tv_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="7dp"
+                        android:textColor="@color/white"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        tools:text="4.8"/>
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_film_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+                    android:textSize="16sp"
+                    android:textColor="@color/primary_text"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="Побег из Шоушенка"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/view_pager_film_images"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:text="@string/tv_year"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_film_name" />
+
+                <TextView
+                    android:id="@+id/tv_year_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="2021"
+                    app:layout_constraintStart_toEndOf="@id/tv_year"
+                    app:layout_constraintTop_toTopOf="@id/tv_year"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_year"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:text="@string/tv_country"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_year" />
+
+                <TextView
+                    android:id="@+id/tv_country_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="USA"
+                    app:layout_constraintStart_toEndOf="@id/tv_country"
+                    app:layout_constraintTop_toTopOf="@id/tv_country"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_country"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_genres"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:text="@string/tv_genres"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_country" />
+
+                <TextView
+                    android:id="@+id/tv_genres_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="драма, комедия, приключение"
+                    app:layout_constraintStart_toEndOf="@id/tv_genres"
+                    app:layout_constraintTop_toTopOf="@id/tv_genres"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_length"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="5dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:text="@string/tv_length"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_genres_value" />
+
+                <TextView
+                    android:id="@+id/tv_length_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:maxLines="2"
+                    android:ellipsize="end"
+                    tools:text="1:50"
+                    app:layout_constraintStart_toEndOf="@id/tv_length"
+                    app:layout_constraintTop_toTopOf="@id/tv_length"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_length"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_details_value"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    tools:text="Стэнли арестован по ложному обвинению в краже кроссовок и отправлен в трудовой лагерь, расположенный в техасской пустыне. Воспитатели «закаляют характер» подростков странным наказанием. Ребята копают ямы в иссушенной земле, но не знают, что их на самом деле используют для раскопок таинственного клада. Однако Стэнли удается раскрыть загадочную связь между сокровищами и проклятием, тяготеющим долгие годы над его семьей…"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_length"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/tv_cast"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:text="@string/tv_cast"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_details_value"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_cast"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    app:layout_constraintTop_toBottomOf="@id/tv_cast"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_small"/>
+
+                <TextView
+                    android:id="@+id/tv_similar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp"
+                    android:textStyle="bold"
+                    android:textSize="14sp"
+                    android:textColor="@color/primary_text"
+                    android:text="@string/tv_similar_films"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_view_cast"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_similar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:paddingEnd="20dp"
+                    android:orientation="horizontal"
+                    android:clipToPadding="false"
+                    app:layout_constraintTop_toBottomOf="@id/tv_similar"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_small"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+        <ImageButton
+            android:id="@+id/image_btn_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_back"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_details_back_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageButton
+            android:id="@+id/image_btn_share"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:padding="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginTop="7dp"
+            android:src="@drawable/ic_share"
+            android:scaleType="centerInside"
+            android:background="@drawable/bg_details_back_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <FrameLayout
+            android:id="@+id/btn_like"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_round_blue_btn"
+            android:elevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <CheckBox
+                android:id="@+id/checkbox_like"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:button="@null"
+                android:background="@drawable/selector_like_checkbox"
+                android:checked="false"
+                android:gravity="center"/>
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        android:elevation="3dp"
+        tools:visibility="gone"
+        app:shimmer_auto_start="true"
+        app:shimmer_clip_to_children="true"
+        app:shimmer_duration="800"
+        app:shimmer_fixed_width="250dp"
+        app:shimmer_tilt="20">
+
+        <include layout="@layout/layout_film_details_loading"/>
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout >

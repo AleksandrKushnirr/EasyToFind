@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_navigavion_nav_graph"
+    app:startDestination="@id/topFilmsFragment">
+
+    <fragment
+        android:id="@+id/topFilmsFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.top.TopFilmsFragment"
+        android:label="TopFilmsFragment"
+        tools:layout="@layout/fragment_top_films">
+        <action
+            android:id="@+id/action_topFilmsFragment_to_filmsListFragment"
+            app:destination="@id/filmsListFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_topFilmsFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search"/>
+
+    <fragment
+        android:id="@+id/likedFilmsFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.liked.LikedFilmsFragment"
+        android:label="LikedFilmsFragment"
+        tools:layout="@layout/fragment_list">
+
+        <action
+            android:id="@+id/action_likedFilmsFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/remindersFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.reminders.RemindersFragment"
+        android:label="RemindersFragment"
+        tools:layout="@layout/fragment_reminders"/>
+    <fragment
+        android:id="@+id/filmsListFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.list_fragment.FilmsListFragment"
+        android:label="FilmsListFragment"
+        tools:layout="@layout/fragment_list">
+
+        <argument
+            android:name="list_type"
+            app:argType="string"/>
+        <action
+            android:id="@+id/action_filmsListFragment_to_filmDetailsFragment"
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+
+    </fragment>
+    <fragment
+        android:id="@+id/filmDetailsFragment"
+        android:name="com.kushnir.app.easytofind.ui.main.details.FilmDetailsFragment"
+        android:label="FilmDetailsFragment"
+        tools:layout="@layout/fragment_film_details">
+
+        <argument
+            android:name="film_id"
+            app:argType="integer"/>
+
+        <action
+            android:id="@+id/action_filmDetailsFragment_self"
+            app:destination="@id/filmDetailsFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right"/>
+
+    </fragment>
+
+    <dialog
+        android:id="@+id/errorDialog"
+        android:name="com.kushnir.app.easytofind.ui.dialogs.ErrorDialog"
+        android:label="ErrorDialog"
+        tools:layout="@layout/dialog_error">
+
+        <argument
+            android:name="error"
+            app:argType="com.kushnir.app.easytofind.data.models.responses.BaseErrorMessage"/>
+
+        <argument
+            android:name="error_string"
+            app:argType="string"/>
+    </dialog>
+</navigation>
