@@ -1,1 +1,15 @@
-EasyToFind
+This is a small application that I started developing recently in my free time. The goal of the project is to have a sample of my own code that I can provide employers for review.
+
+  At the moment, the project consists of the following technology stack:
+  - Kotlin 100%
+  - Coroutines
+  - Clean Architecture with Model-View-ViewModel
+  - Android Jetpack
+  - Networking: Retrofit 2, OkHttp3
+  - DI: Koin
+  - Database: Room
+  - Glide for image downloading 
+
+At the moment, the application does not have a lot of functionality. Now the user can view different tops of films (best, popular, expected), view detailed information about the film and add films to the list of favorites. In the near future, the existing functionality will be improved, the search and functionality of reminders about the release of new films will be implemented.
+
+
