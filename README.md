@@ -1,3 +1,4 @@
+
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/7abd81b84bbe4a869a54a753df1268c3)](https://www.codacy.com/gh/AleksandrKushnirr/EasyToFind/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=AleksandrKushnirr/EasyToFind&amp;utm_campaign=Badge_Grade)
 
 ## About the project
