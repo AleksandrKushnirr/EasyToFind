@@ -1,24 +1,25 @@
 buildscript {
-    ext.kotlin_version = "1.4.21"
+    ext.kotlin_version = "1.5.0"
     repositories {
         google()
-        jcenter()
         maven { url 'https://jitpack.io' }
         maven { url "https://plugins.gradle.org/m2/" }
         mavenCentral()
+        jcenter() // TODO Заменить пейдж индик4атор вью и убрать
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.1.3"
+        classpath "com.android.tools.build:gradle:7.0.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0'
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5'
     }
 }
 
 allprojects {
     repositories {
         google()
-        jcenter()
         maven { url 'https://jitpack.io' }
+        mavenCentral()
+        jcenter() // TODO Заменить пейдж индикатор вью и убрать
     }
 }
 
